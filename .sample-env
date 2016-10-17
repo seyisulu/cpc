@@ -1,0 +1,3 @@
+DB_URL=mongodb://server/db
+OPENWM_URL=http://api.openweathermap.org/data/2.5/weather
+OPENWM_KEY=fakeKey
