@@ -1,6 +1,11 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .ui.middle.aligned.center.aligned.grid
+    .column
+      h2.ui.red.image.header
+        img.image(src='/logo.png')
+        .content
+          | #{message}          
+      h4= error.status
+      pre #{error.stack}

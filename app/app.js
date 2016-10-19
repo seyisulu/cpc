@@ -7,12 +7,13 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     chalk = require('chalk'),
-    router = express.Router(),
-    app = express(),
+    Client = require('node-rest-client').Client;
+mongoose.Promise = global.Promise;
+var app = express(),
     pro = app.get('env') !== 'development'? true: false,
     log = require('./log')({ chalk: chalk }),
     dbo = require('./dbo')({ mongoose: mongoose, log: log }),
-    routeOpts = { dbo: dbo, log: log, router: router },
+    routeOpts = { dbo: dbo, log: log, router: express.Router(), client: new Client() },
     home = require('./routes/home')(routeOpts),
     apiv1 = require('./routes/apiv1')(routeOpts);
 
@@ -30,6 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', home);
 app.use('/api/v1', apiv1);
+
+app.use('/bower_components', express.static(path.join(__dirname, '..', 'bower_components')));
+app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

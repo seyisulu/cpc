@@ -27,10 +27,10 @@ describe('City Mongoose Model (city)', function () {
 
   afterEach(function () {
     logMock.restore();
+    cityMock.restore();
   });
 
   after(function () {
-    cityMock.restore();
     mongooseConnStub.restore();
   });
 
@@ -51,9 +51,9 @@ describe('City Mongoose Model (city)', function () {
 
   it('#findByCoords should find cities by coordinates', function (done) {//"lon":3.75,"lat":6.58333
     cityMock
-      .expects('find').withArgs({ coord: { $near: { $geometry: { type: 'Point', coordinates: [3.75, 6.58333] }, $maxDistance: 25000 } } })
-      .chain('limit', 10)
-      .chain('sort', 'name country')
+      .expects('find').withArgs({ coord: { $near: { $geometry: { type: 'Point', coordinates: [3.75, 6.58333] }, $maxDistance: 5000 } } })
+      .chain('limit', 20)
+      .chain('sort', 'name')
       .chain('exec')
       .resolves('RESULT');
 

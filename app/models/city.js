@@ -1,6 +1,6 @@
 module.exports = function (opts) {
   var citySchema = opts.mongoose.Schema({
-        _id: { type: String, required: true, select: true, unique: true },
+        _id: { type: Number, required: true, select: true, unique: true },
         name: { type: String, required: true, select: true, index: true },
         country: { type: String, required: true, select: true },
         coord: {
@@ -9,21 +9,21 @@ module.exports = function (opts) {
         }
       });
 
-  citySchema.static('findByName', function (name) {
+  citySchema.statics.findByName = function (name) {
     return this
       .find({ name: { '$regex': name, '$options': 'i' } })
       .limit(10)
       .sort('name country')
       .exec();
-  });
+  };
 
-  citySchema.static('findByCoords', function (coord) {
-  return this
-    .find({ coord: { $near: { $geometry: { type: 'Point', coordinates: coord }, $maxDistance: 25000 } } })
-    .limit(10)
-    .sort('name country')
-    .exec();
-  });
+  citySchema.statics.findByCoords = function (coord) {
+    return this
+      .find({ coord: { $near: { $geometry: { type: 'Point', coordinates: coord }, $maxDistance: 5000 } } })
+      .limit(20)
+      .sort('name')
+      .exec();
+  };
 
   try { // catch multiple calls in tests
     opts.mongoose.model('city', citySchema);

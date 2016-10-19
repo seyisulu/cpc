@@ -1,0 +1,13 @@
+script(src='/node_modules/jquery/dist/jquery.min.js')
+script(src='/node_modules/semantic-ui-css/semantic.min.js')
+script(src='/bower_components/angular/angular.min.js')
+script(src='/bower_components/angular-route/angular-route.min.js')
+script(src='/bower_components/angular-resource/angular-resource.min.js')
+script(src='/javascripts/dropdown.js')
+script(src='/javascripts/client.js')
+script.
+  $(document).ready(function() {
+    $('.ui.accordion').accordion({ selector: { trigger: '.title .icon' } });
+    $('.ui.dropdown').dropdown();
+    $('.special.cards .image').dimmer({ on: 'hover' });
+  });

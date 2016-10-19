@@ -1,7 +1,36 @@
 doctype html
-html
+html(ng-app='cpc')
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    include head
+    style(type='text/css').
+      body {
+        background-color: #DADADA;
+      }
+      body > .grid {
+        height: 100%;
+      }
+      .image {
+        margin-top: -100px;
+      }
+      .column {
+        max-width: 450px;
+      }
+    
+  body(ng-controller='motherCtrl as mtc')
+    block content 
+        
+    include foot
+    script.
+      $(document).ready(function() {        
+        $('#searchform').form({
+          fields: {
+            city: {
+              identifier: 'city',
+              rules: [{
+                type: 'empty',
+                prompt: 'Please enter a valid value for {name}'
+              }]
+            }
+          }
+        });        
+      });

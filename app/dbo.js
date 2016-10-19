@@ -10,8 +10,8 @@ module.exports = function (opts) {
   });
 
   var dbo = {
-    City: require('./models/city')({ mongoose: opts.mongoose, chalk: opts.chalk, log: opts.log }),
-    Weather: false
+    City: require('./models/city')({ mongoose: opts.mongoose, log: opts.log }),
+    Weather: require('./models/weather')({ mongoose: opts.mongoose, log: opts.log })
   };
 
   return dbo;

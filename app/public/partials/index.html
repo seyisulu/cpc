@@ -1,0 +1,19 @@
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui red image header"><img src="/logo.png" class="image"/>
+      <div class="content">Weather</div>
+    </h2>
+    <form id="sinform" ng-submit="" class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input"><i class="user icon"></i>
+            <input type="text" name="city" placeholder="Search city" tabindex="0"/>
+          </div>
+        </div>
+        <button type="submit" class="ui fluid large red submit button">Search</button>
+      </div>
+      <div class="ui error message"></div>
+    </form>
+    <div class="ui message">Have GPS? <a href="/#/autodetect">Auto Detect Location</a></div>
+  </div>
+</div>

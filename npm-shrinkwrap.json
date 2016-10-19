@@ -570,6 +570,11 @@
       "from": "jade@>=1.11.0 <1.12.0",
       "resolved": "https://registry.npmjs.org/jade/-/jade-1.11.0.tgz"
     },
+    "jquery": {
+      "version": "3.1.1",
+      "from": "jquery@*",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.1.1.tgz"
+    },
     "jstransformer": {
       "version": "0.0.2",
       "from": "jstransformer@0.0.2",
@@ -1030,6 +1035,11 @@
       "version": "1.2.1",
       "from": "sax@>=0.6.0",
       "resolved": "https://registry.npmjs.org/sax/-/sax-1.2.1.tgz"
+    },
+    "semantic-ui-css": {
+      "version": "2.2.4",
+      "from": "semantic-ui-css@latest",
+      "resolved": "https://registry.npmjs.org/semantic-ui-css/-/semantic-ui-css-2.2.4.tgz"
     },
     "semver": {
       "version": "5.3.0",

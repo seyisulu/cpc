@@ -1,0 +1,27 @@
+{
+  "name": "cpc",
+  "description": "Compucorp Task One",
+  "main": "",
+  "authors": [
+    "Emmanuel Olowosulu <eolowo@blueenzyme.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "compucorp",
+    "openweathermaps"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-resource": "^1.5.8"
+  }
+}

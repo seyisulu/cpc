@@ -18,6 +18,7 @@
     "morgan": "~1.7.0",
     "node-rest-client": "^2.0.1",
     "nodemon": "^1.11.0",
+    "semantic-ui-css": "^2.2.4",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
