@@ -24,16 +24,28 @@
           }
         };
       }],
-      citySvc = ['$resource', '$q', 'URLS',
-      function citySvc($resource, $q, URLS) {
+      citySvc = ['$resource', '$window', 'URLS',
+      function citySvc($resource, $window, URLS) {
         return {
-          getNearestCity: function getNearestCity(pos) {
+          getNearestCities: function getNearestCities(pos) {
             return $resource(URLS.APIBase + URLS.cityBase + '/' + pos.lng + '/' + pos.lat).query();
+          },
+          getMatchingCities: function getMatchingCities(qry) {
+            return $resource(URLS.APIBase + URLS.cityBase + '/' + $window.encodeURIComponent(qry)).query();
           }
         };
       }],
       cityCtrl = ['$scope', '$rootScope', 'citySvc',
       function cityCtrl($scope, $rootScope, citySvc) {
+        $scope.city = '';
+        $scope.cities = [];
+        $scope.findCities = function findCities() {
+          citySvc.getMatchingCities($scope.city).$promise
+          .then(function getMatchingCitiesCb(cities) {
+            console.log(cities);
+            $scope.cities = cities;
+          });
+        };
       }],
       weatherSvc = ['$resource', '$q', 'URLS',
       function weatherSvc($resource, $q, URLS) {
@@ -86,9 +98,9 @@
         $scope.getCity = function getCity() {
           geoSvc.geoLocate()
           .then(function geoLocateCb(pos) {
-            return citySvc.getNearestCity(pos).$promise;
+            return citySvc.getNearestCities(pos).$promise;
           })
-          .then(function getNearestCityCb(cities) {
+          .then(function getNearestCitiesCb(cities) {
             $window.location.hash = URLS.weatherBase + '/' + cities[0]._id;
           })
           .catch(function getCityErr(err) {

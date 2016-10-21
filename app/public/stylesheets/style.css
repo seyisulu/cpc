@@ -21,7 +21,7 @@ a:hover{color:#1e70bf;text-decoration:none}
 textarea::-webkit-selection,input::-webkit-selection{background-color:rgba(100,100,100,.4);color:rgba(0,0,0,.87)}
 textarea::-moz-selection,input::-moz-selection{background-color:rgba(100,100,100,.4);color:rgba(0,0,0,.87)}
 textarea::selection,input::selection{background-color:rgba(100,100,100,.4);color:rgba(0,0,0,.87)}
-#wcard * { text-align: left; }
+#wcard *, #ctform * { text-align: left; }
 #wcard .meta p { text-transform: capitalize; }
 #wcard i.large { font-size: 1.5rem; vertical-align: middle; }
 #wcard p.large { line-height: 1.5rem; }

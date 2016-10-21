@@ -1,7 +1,7 @@
 <h2 class="ui red image header"><img src="/logo.png" class="image"/>
   <div class="content">Weather</div>
 </h2>
-<form id="sinform" ng-submit="findCities()" class="ui large form">
+<form id="ctform" ng-submit="findCities()" class="ui large form">
   <div class="ui stacked segment">
     <div class="field">
       <div class="ui left icon input"><i class="marker icon"></i>
@@ -9,7 +9,35 @@
       </div>
     </div>
     <button type="submit" class="ui fluid large red submit button">Search</button>
+    <div class="ui list">
+      <div class="item" ng-repeat="city in cities">
+        <div class="content">
+          <a class="header" href="#/weather/{{city._id}}">{{city.name}}</a>
+          <div class="description"><i class="flag {{city.country.toLowerCase()}}"></i>{{city.country}}</div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="ui error message"></div>
 </form>
 <div class="ui message">Have GPS? <a href="/#/">Auto Detect Location</a></div>
+<!--
+
+<div class="item" href="#" ng-repeat="city in cities">
+  <i class="flag {{city.country.toLowerCase()}}"></i>
+  <div class="content">{{city.name}}, {{city.country}}</div>
+</div>
+
+    <i class="folder icon"></i>
+    <div class="content">
+      <div class="header">src</div>
+      <div class="description">Source files for project</div>
+      <div class="list">
+        <div class="item" ng-repeat="city in cities">
+          <i class="folder icon"></i>
+          <div class="content">
+            <div class="header">site</div>
+            <div class="description">Your site's theme</div>
+          </div>
+        </div>
+      -->
