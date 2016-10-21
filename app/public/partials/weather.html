@@ -1,0 +1,19 @@
+<div class="ui basic segment" ng-if="weather">
+  <div id="wcard" class="ui fluid card">
+    <div class="image backdrop {{wclass}}" ng-include="'/images/weather.svg'"></div>
+    <div class="content">
+      <h1 class="ui header">{{weather.weather[0].main}} <i class="wi wi-owm-{{weather.weather[0].id}}"></i></h1>
+      <div class="meta">
+        <p>{{weather.weather[0].description}}</p>
+      </div>
+      <div class="description">
+        <p class="large"><i class="large wi wi-wind towards-{{wnddir}}-deg"></i> Wind: {{wndspd}}<sup>m</sup>/<sub>s</sub> at {{wnddir}}&deg;</p>
+        <p class="large"><i class="large wi wi-humidity"></i> Humidity: {{humidity}}%</p>
+        <p class="large"><i class="large wi wi-barometer"></i> Pressure: {{pressure}}hpa</p>
+        <p><i class="flag {{weather.sys.country.toLowerCase()}}"></i></i> <strong>{{weather.name}}</strong>, {{weather.sys.country}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui message"><a href="/#/cities">check another city</a></div>

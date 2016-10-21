@@ -1,8 +1,323 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);
+html,body,ng-view{height:100%!important;display:block;}
+html{font-size:14px}
+body{margin:0px;padding:0px;overflow-x:hidden;min-width:320px;background:#231919;font-family:'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4285em;color:rgba(0,0,0,.87);font-smoothing:antialiased}
+h1,h2,h3,h4,h5{font-family:'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;line-height:1.2857em;margin:calc(2rem - .14285em) 0em 1rem;font-weight:bold;padding:0em}
+h1{min-height:1rem;font-size:2rem}
+h2{font-size:1.714rem}
+h3{font-size:1.28rem}
+h4{font-size:1.071rem}
+h5{font-size:1rem}
+h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child{margin-top:0em}
+h1:last-child,h2:last-child,h3:last-child,h4:last-child,h5:last-child{margin-bottom:0em}
+p{margin:0em 0em 1em;line-height:1.4285em}
+p:first-child{margin-top:0em}
+p:last-child{margin-bottom:0em}
+a{color:#4183c4;text-decoration:none}
+a:hover{color:#1e70bf;text-decoration:none}
+::-webkit-selection{background-color:#cce2ff;color:rgba(0,0,0,.87)}
+::-moz-selection{background-color:#cce2ff;color:rgba(0,0,0,.87)}
+::selection{background-color:#cce2ff;color:rgba(0,0,0,.87)}
+textarea::-webkit-selection,input::-webkit-selection{background-color:rgba(100,100,100,.4);color:rgba(0,0,0,.87)}
+textarea::-moz-selection,input::-moz-selection{background-color:rgba(100,100,100,.4);color:rgba(0,0,0,.87)}
+textarea::selection,input::selection{background-color:rgba(100,100,100,.4);color:rgba(0,0,0,.87)}
+#wcard * { text-align: left; }
+#wcard .meta p { text-transform: capitalize; }
+#wcard i.large { font-size: 1.5rem; vertical-align: middle; }
+#wcard p.large { line-height: 1.5rem; }
+.backdrop { height:300px; }
+.backdrop.Sunny {
+    background-color: #AECAF8;
 }
-
-a {
-  color: #00B7FF;
+.backdrop.Cloudy {
+    background-color: rgb(150, 179, 196);
+}
+.backdrop.Rainy {
+    background-color: #7E8DA6;
+}
+.backdrop #Cloudy_frame,
+.backdrop #Clear_frame,
+.backdrop #Sunny_frame,
+.backdrop #Rainy_frame {
+    opacity: 0;
+    transition: all 5s ease;
+}
+.backdrop.Clear #Clear_frame,
+.backdrop.Sunny #Sunny_frame {
+    opacity: 1;
+    transition: all 5s ease;
+}
+.backdrop.Cloudy #Cloudy_frame {
+    opacity: 1;
+    transition: all 5s ease;
+}
+.backdrop.Rainy #Rainy_frame {
+    opacity: 1;
+    transition: all 5s ease;
+}
+#Sun,
+path[id*="T_"] {
+    transform: scale(1, 1);
+    transform: translateY(0px);
+    animation: thesun 5s linear infinite;
+    -moz-animation: thesun 5s linear infinite;
+    -webkit-animation: thesun 5s linear infinite;
+    -o-animation: thesun 5s linear infinite;
+}
+@-webkit-keyframes thesun {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.01, 1.01);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+@-moz-keyframes thesun {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.01, 1.01);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+#Cloud_1 {
+    animation: fastcloud 40s linear infinite;
+    -moz-animation: fastcloud 40s linear infinite;
+    -webkit-animation: fastcloud 40s linear infinite;
+    -o-animation: fastcloud 40s linear infinite;
+}
+@-webkit-keyframes fastcloud {
+    0% {
+        transform: translateX(-400px) scale(1);
+    }
+    50% {
+        transform: translateX(0px) scale(1);
+    }
+    100% {
+        transform: translateX(400px) scale(1);
+    }
+}
+@-moz-keyframes fastcloud {
+    0% {
+        transform: translateX(-400px) scale(1);
+    }
+    50% {
+        transform: translateX(0px) scale(1);
+    }
+    100% {
+        transform: translateX(400px) scale(1);
+    }
+}
+#Cloud_2 {
+    animation: mediumcloud 60s linear infinite;
+    -moz-animation: mediumcloud 60s linear infinite;
+    -webkit-animation: mediumcloud 60s linear infinite;
+    -o-animation: mediumcloud 60s linear infinite;
+}
+@-webkit-keyframes mediumcloud {
+    0% {
+        transform: translate(-400px, -100px) scale(.6);
+    }
+    50% {
+        transform: translate(0px, -100px) scale(.6);
+    }
+    100% {
+        transform: translate(400px, -100px) scale(.6);
+    }
+}
+@-moz-keyframes mediumcloud {
+    0% {
+        transform: translate(-400px, -100px) scale(.6);
+    }
+    50% {
+        transform: translate(0px, -100px) scale(.6);
+    }
+    100% {
+        transform: translate(400px, -100px) scale(.6);
+    }
+}
+#Cloud_3 {
+    animation: veryslowcloud 90s linear infinite;
+    -moz-animation: veryslowcloud 90s linear infinite;
+    -webkit-animation: veryslowcloud 90s linear infinite;
+    -o-animation: veryslowcloud 90s linear infinite;
+}
+@-webkit-keyframes veryslowcloud {
+    0% {
+        transform: translate(-400px, -100px) scale(.4);
+    }
+    50% {
+        transform: translate(0px, -100px) scale(.4);
+    }
+    100% {
+        transform: translate(400px, -100px) scale(.4);
+    }
+}
+@-moz-keyframes veryslowcloud {
+    0% {
+        transform: translate(-400px, -100px) scale(.4);
+    }
+    50% {
+        transform: translate(0px, -100px) scale(.4);
+    }
+    100% {
+        transform: translate(400px, -100px) scale(.4);
+    }
+}
+#CCloud_2 {
+    animation: cloudycloud1 60s linear infinite;
+    -moz-animation: cloudycloud1 60s linear infinite;
+    -webkit-animation: cloudycloud1 60s linear infinite;
+    -o-animation: cloudycloud1 60s linear infinite;
+}
+@-webkit-keyframes cloudycloud1 {
+    0% {
+        transform: translate(-260px, 0px) scale(.4);
+    }
+    50% {
+        transform: translate(0px, 0px) scale(.4);
+    }
+    100% {
+        transform: translate(260px, 0px) scale(.4);
+    }
+}
+#CCloud_3 {
+    animation: cloudycloud2 100s linear infinite;
+    -moz-animation: cloudycloud2 100s linear infinite;
+    -webkit-animation: cloudycloud2 100s linear infinite;
+    -o-animation: cloudycloud2 100s linear infinite;
+}
+@-webkit-keyframes cloudycloud2 {
+    0% {
+        transform: translate(-260px, 0px) scale(.2);
+    }
+    50% {
+        transform: translate(0px, 0px) scale(.2);
+    }
+    100% {
+        transform: translate(260px, 0px) scale(.2);
+    }
+}
+@-moz-keyframes cloudycloud2 {
+    0% {
+        transform: translate(-260px, 0px) scale(.2);
+    }
+    50% {
+        transform: translate(0px, 0px) scale(.2);
+    }
+    100% {
+        transform: translate(260px, 0px) scale(.2);
+    }
+}
+#Drop_1 {
+    animation: raindrop .5s linear infinite;
+    -moz-animation: raindrop .5s linear infinite;
+    -webkit-animation: raindrop .5s linear infinite;
+    -o-animation: raindrop .5s linear infinite;
+}
+#Drop_2 {
+    animation: raindrop .2s linear infinite;
+    -moz-animation: raindrop .2s linear infinite;
+    -webkit-animation: raindrop .2s linear infinite;
+    -o-animation: raindrop .2s linear infinite;
+}
+#Drop_3 {
+    animation: raindrop .7s linear infinite;
+    -moz-animation: raindrop .7s linear infinite;
+    -webkit-animation: raindrop .7s linear infinite;
+    -o-animation: raindrop .7s linear infinite;
+}
+#Drop_4 {
+    animation: raindrop .3s linear infinite;
+    -moz-animation: raindrop .3s linear infinite;
+    -webkit-animation: raindrop .3s linear infinite;
+    -o-animation: raindrop .3s linear infinite;
+}
+#Drop_5 {
+    animation: raindrop .6s linear infinite;
+    -moz-animation: raindrop .6s linear infinite;
+    -webkit-animation: raindrop .6s linear infinite;
+    -o-animation: raindrop .6s linear infinite;
+}
+#Drop_6 {
+    animation: raindrop .9s linear infinite;
+    -moz-animation: raindrop .9s linear infinite;
+    -webkit-animation: raindrop .9s linear infinite;
+    -o-animation: raindrop .9s linear infinite;
+}
+#Drop_7 {
+    animation: raindrop .2s linear infinite;
+    -moz-animation: raindrop .2s linear infinite;
+    -webkit-animation: raindrop .2s linear infinite;
+    -o-animation: raindrop .2s linear infinite;
+}
+#Drop_2 {
+    animation: raindrop .54s linear infinite;
+    -moz-animation: raindrop .54s linear infinite;
+    -webkit-animation: raindrop .54s linear infinite;
+    -o-animation: raindrop .54s linear infinite;
+}
+#Drop_8 {
+    animation: raindrop .72s linear infinite;
+    -moz-animation: raindrop .72s linear infinite;
+    -webkit-animation: raindrop .72s linear infinite;
+    -o-animation: raindrop .72s linear infinite;
+}
+#Drop_9 {
+    animation: raindrop 1s linear infinite;
+    -moz-animation: raindrop 1s linear infinite;
+    -webkit-animation: raindrop 1s linear infinite;
+    -o-animation: raindrop 1s linear infinite;
+}
+#Drop_10 {
+    animation: raindrop .55s linear infinite;
+    -moz-animation: raindrop .55s linear infinite;
+    -webkit-animation: raindrop .55s linear infinite;
+    -o-animation: raindrop .55s linear infinite;
+}
+#Drop_11 {
+    animation: raindrop .43s linear infinite;
+    -moz-animation: raindrop .43s linear infinite;
+    -webkit-animation: raindrop .43s linear infinite;
+    -o-animation: raindrop .43s linear infinite;
+}
+#Drop_12 {
+    animation: raindrop .25s linear infinite;
+    -moz-animation: raindrop .25s linear infinite;
+    -webkit-animation: raindrop .25s linear infinite;
+    -o-animation: raindrop .25s linear infinite;
+}
+#Drop_13 {
+    animation: raindrop .6s linear infinite;
+    -moz-animation: raindrop .6s linear infinite;
+    -webkit-animation: raindrop .6s linear infinite;
+    -o-animation: raindrop .6s linear infinite;
+}
+#Drop_14 {
+    animation: raindrop .25s linear infinite;
+    -moz-animation: raindrop .25s linear infinite;
+    -webkit-animation: raindrop .25s linear infinite;
+    -o-animation: raindrop .25s linear infinite;
+}
+@-webkit-keyframes raindrop {
+    0% {
+        transform: scaleY(.5);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+@-moz-keyframes raindrop {
+    0% {
+        transform: scaleY(.5);
+    }
+    100% {
+        transform: scaleY(1);
+    }
 }

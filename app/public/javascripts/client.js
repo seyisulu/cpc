@@ -2,7 +2,7 @@
   'use strict';
 
   var cpc = angular.module('cpc', ['ngRoute', 'ngResource']),
-      URLs = { APIBase: '/api/v1', cityBase: '/city/', weatherBase: '/weather/' },
+      URLS = { APIBase: '/api/v1', cityBase: '/city', weatherBase: '/weather' },
       geoSvc = ['$window', '$q',
       function geoSvc($window, $q) {
       	return {
@@ -24,29 +24,78 @@
           }
         };
       }],
-      citySvc = ['$http', '$q', 'URLs',
-      function citySvc($http, $q, URLs) {
+      citySvc = ['$resource', '$q', 'URLS',
+      function citySvc($resource, $q, URLS) {
         return {
+          getNearestCity: function getNearestCity(pos) {
+            return $resource(URLS.APIBase + URLS.cityBase + '/' + pos.lng + '/' + pos.lat).query();
+          }
         };
       }],
       cityCtrl = ['$scope', '$rootScope', 'citySvc',
       function cityCtrl($scope, $rootScope, citySvc) {
       }],
-      weatherSvc = ['$http', '$q', 'URLs',
-      function weatherSvc($http, $q, URLs) {
+      weatherSvc = ['$resource', '$q', 'URLS',
+      function weatherSvc($resource, $q, URLS) {
         return {
+          getWeather: function getWeather(id) {
+            return $resource(URLS.APIBase + URLS.weatherBase + URLS.cityBase + '/' + id).get();
+          }
         };
       }],
-      weatherCtrl = ['$scope', '$rootScope', 'weatherSvc',
-      function weatherCtrl($scope, $rootScope, weatherSvc) {
-      }],
-      homeCtrl = ['$scope', 'geoSvc', 'citySvc',
-      function homeCtrl($scope, geoSvc, citySvc) {
-        geoSvc.geoLocate().then(function geoLocateSucess(pos) {
-          console.log(pos);
-        }, function geoLocateFailure(err) {
+      weatherCtrl = ['$scope', '$rootScope', '$routeParams', 'weatherSvc',
+      function weatherCtrl($scope, $rootScope, $routeParams, weatherSvc) {
+        $scope.weather = {};
+        weatherSvc.getWeather($routeParams.id).$promise
+        .then(function getWeatherCb(weather) {
+          $scope.weather = weather;
+          $scope.wnddir = Math.floor($scope.weather.wind.deg);
+          $scope.wndspd = $scope.weather.wind.speed;
+          $scope.temp = $scope.weather.main.temp;
+          $scope.pressure = $scope.weather.main.pressure;
+          $scope.humidity = $scope.weather.main.humidity;
+          $scope.wclass = $scope.getWClass();
+          console.log('weather:', weather);
+        })
+        .catch(function getWeatherErr(err) {
           console.log(err);
         });
+        $scope.getWClass = function getWClass() {
+          var cls;
+          if ($scope.weather) {
+            switch($scope.weather.weather[0].main) {
+              case 'Clouds':
+                cls = 'Cloudy';
+                break;
+              case 'Rain':
+              case 'Snow':
+              case 'Drizzle':
+              case 'Thunderstorm':
+                cls = 'Rainy';
+                break;
+              default:
+                cls = 'Sunny';
+            }
+          }
+          return cls;
+        };
+      }],
+      homeCtrl = ['$scope', '$window', 'URLS', 'geoSvc', 'citySvc',
+      function homeCtrl($scope, $window, URLS, geoSvc, citySvc) {
+        $scope.city = 'Detecting location...';
+        $scope.getCity = function getCity() {
+          geoSvc.geoLocate()
+          .then(function geoLocateCb(pos) {
+            return citySvc.getNearestCity(pos).$promise;
+          })
+          .then(function getNearestCityCb(cities) {
+            $window.location.hash = URLS.weatherBase + '/' + cities[0]._id;
+          })
+          .catch(function getCityErr(err) {
+            $window.alert('An error occured getting your location');
+          });
+        };
+        $scope.getCity();
       }],
       motherCtrl = ['$scope', '$rootScope',
       function motherCtrl($scope, $rootScope) {
@@ -56,10 +105,10 @@
     $routeProvider
     .when('/', { templateUrl: '/partials/index.html', controller: 'homeCtrl', controllerAs: 'hmc' })
     .when('/cities', { templateUrl: '/partials/cities.html', controller: 'cityCtrl', controllerAs: 'ctc' })
-    .when('/weather/:ctyId', { templateUrl: '/partials/weather.html', controller: 'weatherCtrl', controllerAs: 'wtc' })
+    .when('/weather/:id', { templateUrl: '/partials/weather.html', controller: 'weatherCtrl', controllerAs: 'wtc' })
     .otherwise({ redirectTo: '/' });
   })
-  .constant('URLs', URLs)
+  .constant('URLS', URLS)
   .controller('motherCtrl', motherCtrl)
   .controller('homeCtrl', homeCtrl)
   .controller('cityCtrl', cityCtrl)
